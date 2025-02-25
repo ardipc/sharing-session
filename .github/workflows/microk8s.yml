@@ -91,7 +91,7 @@ jobs:
       - name: Get Identifier
         run: |
           echo "Run ID: ${{ github.run_id }}"
-          echo "Run Number: ${{ gitub.run_number }}"
+          echo "Run Number: ${{ github.run_number }}"
 
       #- name: Replace Identifier to Deployment
       #  run: |
