@@ -25,10 +25,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: whoami
+      - name: Whoami
         run: |
           whoami
           pwd
+
+      - name: List files or Directory
+        run: |
+          ls -alth .
           
       # Runs a single command using the runners shell
       - name: Run a one-line script
