@@ -88,6 +88,16 @@ jobs:
           echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
+      - name: Get Identifier
+        run: |
+          echo "Run ID: ${{ github.run_id }}"
+          echo "Run Number: ${{ gitub.run_number }}"
+
+      #- name: Replace Identifier to Deployment
+      #  run: |
+      #    sed -i "s/IDENTIFIER/${{ github.run_number }}/g" k8s/deployment.yml
+
       - name: Check deployment
         run: |
+          sed
           kubectl get deployment -n development
