@@ -77,3 +77,12 @@ jobs:
       - name: Checking command microk8s 
         run: |
           microk8s version
+
+      - name: Install kubectl (Bitnami)
+        uses: bitnami/kubectl@latest
+
+      - name: Check kubectl version
+        run: |
+          kubectl version
+          export KUBECONFIG=$(echo "${{ secrets.KUBECONFIG_SECRET }}")
+          kubectl get deployment -n development
