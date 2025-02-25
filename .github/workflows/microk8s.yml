@@ -6,9 +6,11 @@ name: "Sharing Session"
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches:
+      - '*'
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - "*"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -33,6 +35,18 @@ jobs:
       - name: List files or Directory
         run: |
           ls -alth .
+
+      - name: Get Branch Name
+        run: echo "Branch name is ${GITHUB_REF#refs/heads/}"
+
+      - name: Get Source and Target Branches (Pull Request)
+        run: echo "Source: ${{ github.head_ref }}, Target: ${{ github.base_ref }}"
+
+      - name: Set Branch Name
+        run: echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
+      - name: Use Branch Name
+        run: echo "Branch is $BRANCH_NAME"
           
       # Runs a single command using the runners shell
       - name: Run a one-line script
