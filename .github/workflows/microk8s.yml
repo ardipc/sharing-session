@@ -18,7 +18,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  checking:
     # The type of runner that the job will run on
     runs-on: sharing-session
 
@@ -50,12 +50,30 @@ jobs:
       - name: Use Branch Name
         run: echo "Branch is $BRANCH_NAME"
           
-      # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
 
-      # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+  build:
+    runs-on: sharing-session
+    needs: checking
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checking command docker
+        run: |
+          docker info
+
+  deploy:
+    runs-on: sharing-session
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checking command microk8s 
+        run: |
+          microk8s version
