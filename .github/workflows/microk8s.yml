@@ -40,10 +40,12 @@ jobs:
         run: echo "Branch name is ${GITHUB_REF#refs/heads/}"
 
       - name: Get Source and Target Branches (Pull Request)
-        run: echo "Source: ${{ github.head_ref }}, Target: ${{ github.base_ref }}"
+        run: |
+          echo "Source: ${{ github.head_ref }}, Target: ${{ github.base_ref }}"
 
       - name: Set Branch Name
-        run: echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+        run: |
+          echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
       - name: Use Branch Name
         run: echo "Branch is $BRANCH_NAME"
