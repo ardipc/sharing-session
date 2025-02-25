@@ -93,11 +93,11 @@ jobs:
           echo "Run ID: ${{ github.run_id }}"
           echo "Run Number: ${{ github.run_number }}"
 
-      #- name: Replace Identifier to Deployment
-      #  run: |
-      #    sed -i "s/IDENTIFIER/${{ github.run_number }}/g" k8s/deployment.yml
+      - name: Replace Identifier to Deployment
+        run: |
+          sed -i "s/IDENTIFIER/${{ github.run_number }}/g" k8s/deployment.yml
+          echo k8s/deployment.yml
 
       - name: Check deployment
         run: |
-          sed
           kubectl get deployment -n development
