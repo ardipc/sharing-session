@@ -78,11 +78,16 @@ jobs:
         run: |
           microk8s version
 
-      - name: Install kubectl (Bitnami)
-        uses: bitnami/kubectl@latest
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: "latest"
 
-      - name: Check kubectl version
+      - name: Configure Kubeconfig
         run: |
-          kubectl version
-          export KUBECONFIG=$(echo "${{ secrets.KUBECONFIG_SECRET }}")
+          echo "${{ secrets.KUBECONFIG_SECRET }}" > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+
+      - name: Check deployment
+        run: |
           kubectl get deployment -n development
