@@ -96,7 +96,7 @@ jobs:
       - name: Replace Identifier to Deployment
         run: |
           sed -i "s/IDENTIFIER/${{ github.run_number }}/g" k8s/deployment.yml
-          echo k8s/deployment.yml
+          cat k8s/deployment.yml
 
       - name: Check deployment
         run: |
